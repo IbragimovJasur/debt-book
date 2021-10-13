@@ -6,6 +6,12 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 PROJECT_APPS = [
     'apps.users',
+    'apps.restapi',
+]
+
+PROJECT_LIBRARIES = [
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 INSTALLED_APPS = [
@@ -15,7 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + PROJECT_APPS
+] + PROJECT_APPS + PROJECT_LIBRARIES
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -26,6 +33,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
 
 ROOT_URLCONF = 'conf.urls'
 
