@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 
 class Currency(models.Model):
     name = models.CharField(
@@ -18,6 +18,8 @@ class Contact(models.Model):
         ("borrowed", "Borrow"),
         ("paid", "Paid"),
     ]
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     debt_currency = models.ForeignKey(
         Currency, on_delete=models.SET_NULL, null=True, blank= True)
     username = models.CharField(
@@ -42,6 +44,4 @@ class Contact(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.username
-
-    
+        return self.owner.username
