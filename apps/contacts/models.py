@@ -19,9 +19,9 @@ class Contact(models.Model):
         ("paid", "Paid"),
     ]
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name= 'contacts', null=True, blank=True)
     debt_currency = models.ForeignKey(
-        Currency, on_delete=models.SET_NULL, null=True, blank= True)
+        Currency, on_delete=models.SET_NULL, related_name='contacts', null=True, blank= True)
     username = models.CharField(
         "Username", max_length=150)
     phone = models.CharField(
