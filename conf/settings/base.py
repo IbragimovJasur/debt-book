@@ -7,6 +7,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 PROJECT_APPS = [
     'apps.users',
     'apps.restapi',
+    'apps.contacts',
 ]
 
 PROJECT_LIBRARIES = [
