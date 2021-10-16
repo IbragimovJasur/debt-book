@@ -21,4 +21,4 @@ class Contact(models.Model):
         "When contact is updated", auto_now=True)
    
     def __str__(self):
-        return self.owner.username
+        return f"{self.owner.username}-{self.name}"

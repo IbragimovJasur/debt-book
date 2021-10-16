@@ -1,8 +1,8 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, CreateAPIView, ListAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, BasePermission
 from apps.contacts.models import Contact
-from apps.users.models import CustomUser
-from apps.users.serializers import CustomUserSerializer
+from apps.users.models import User
+from apps.users.serializers import UserSerializer
 from apps.contacts.serializers import ContactSerializer
 
 #built permissions
@@ -13,13 +13,13 @@ class IsOwner(BasePermission):
 
 class CustomUserCreateView(CreateAPIView):
     permission_classes = [AllowAny]
-    queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class CustomUserUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
     def get_object(self):
         return self.request.user

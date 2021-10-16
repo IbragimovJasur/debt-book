@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import User
 
-class CustomUserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
+        model = User
         extra_kwargs = {'password': {'write_only': True}}
-        fields= ('username', 'email', 'phone_number', 'avatar', 'password')
+        fields= ('username', 'phone_number', 'avatar', 'password')
 
     def create(self, validated_data):
         user = super().create(validated_data)
