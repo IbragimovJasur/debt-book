@@ -8,7 +8,7 @@ class Contact(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='contacts', null=True, blank=True)
     name = models.CharField(
-        "Username", max_length=150)
+        "Name", max_length=150, null=True)
     avatar = models.ImageField(
         "Profile photo", upload_to='users/avatar/', default='users/avatar/default.jpg')
     phone = models.CharField(
