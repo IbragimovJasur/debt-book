@@ -8,6 +8,7 @@ PROJECT_APPS = [
     'apps.users',
     'apps.restapi',
     'apps.contacts',
+    'apps.main',
 ]
 
 PROJECT_LIBRARIES = [
