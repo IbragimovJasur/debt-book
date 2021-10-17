@@ -10,7 +10,7 @@ class Contact(models.Model):
     name = models.CharField(
         "Name", max_length=150, null=True)
     avatar = models.ImageField(
-        "Profile photo", upload_to='users/avatar/', default='users/avatar/default.jpg')
+        "Profile photo", upload_to='contacts/avatar/', default='contacts/avatar/default.jpg')
     phone = models.CharField(
         "Phone number", max_length=50)
     card_number = models.CharField(

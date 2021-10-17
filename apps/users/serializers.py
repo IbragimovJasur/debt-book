@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Debt
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +21,9 @@ class UserSerializer(serializers.ModelSerializer):
         except KeyError:
             pass
         return user
+
+class DebtSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Debt
+        exclude = ('contact', 'updated_on',)
+        
