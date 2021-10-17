@@ -12,9 +12,12 @@ from apps.main.serializers import CurrencySerializer
 #built permissions
 class IsContactOwner(BasePermission):
     def has_permission(self, request, view):
-        contact= Contact.objects.get(pk=view.kwargs['pk'])
-        return request.user == contact.owner
-    
+        try:
+            contact= Contact.objects.get(pk=view.kwargs['pk'])
+            return request.user == contact.owner
+        except:
+            return False
+
 class IsDebtOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
         debt= Debt.objects.get(pk= view.kwargs['debt_pk']) 
