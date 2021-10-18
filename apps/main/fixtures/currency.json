@@ -1,0 +1,34 @@
+[
+    {
+        "model":  "main.Currency",
+        "id":  "1",
+        "fields": {
+            "name":  "USD",
+            "symbol":  "$"
+        }
+    },
+    {
+        "model":  "main.Currency",
+        "id":  "2",
+        "fields": {
+            "name":  "Euro",
+            "symbol":  "€"
+        }
+    },
+    {
+        "model":  "main.Currency",
+        "id":  "3",
+        "fields": {
+            "name":  "RUB",
+            "symbol":  "₽"
+        }
+    },
+    {
+        "model":  "main.Currency",
+        "id":  "4",
+        "fields": {
+            "name":  "UZS",
+            "symbol":  "So\u0027m}"
+        }
+    }
+]
