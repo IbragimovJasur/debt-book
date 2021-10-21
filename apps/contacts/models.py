@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 class Contact(models.Model):
     class Meta:
@@ -22,3 +23,6 @@ class Contact(models.Model):
    
     def __str__(self):
         return f"{self.owner.username}-{self.name}"
+
+    def get_contact_from_users(self):
+        return get_user_model().objects.filter(phone_number = self.phone)
