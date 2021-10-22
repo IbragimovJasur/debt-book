@@ -15,6 +15,7 @@ PROJECT_LIBRARIES = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_swagger',
+    'fcm_django',
 ]
 
 INSTALLED_APPS = [
@@ -50,6 +51,21 @@ REST_FRAMEWORK = {
 }
 
 ROOT_URLCONF = 'conf.urls'
+
+from firebase_admin import initialize_app
+FIREBASE_APP = initialize_app()
+
+FCM_DJANGO_SETTINGS = {
+     # default: _('FCM Django')
+    "APP_VERBOSE_NAME": "DebtBook",
+     # true if you want to have only one active device per registered user at a time
+     # default: False
+    "ONE_DEVICE_PER_USER": False,
+     # devices to which notifications cannot be sent,
+     # are deleted upon receiving error response from FCM
+     # default: False
+    "DELETE_INACTIVE_DEVICES": False,
+}
 
 TEMPLATES = [
     {
