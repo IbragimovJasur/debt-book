@@ -9,6 +9,6 @@ class DebtAdmin(admin.ModelAdmin):
 
 class UserAdmin(UserAdmin):
     model = User
-    list_display = ['username', 'phone_number', ]
+    list_display = ['username', 'phone', ]
 
 admin.site.register(User, UserAdmin)

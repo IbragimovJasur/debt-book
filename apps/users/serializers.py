@@ -5,7 +5,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         extra_kwargs = {'password': {'write_only': True}}
-        fields= ('username', 'phone_number', 'avatar', 'password')
+        fields= ('username', 'phone', 'avatar', 'password')
 
     def create(self, validated_data):
         user = super().create(validated_data)
@@ -25,5 +25,9 @@ class UserSerializer(serializers.ModelSerializer):
 class DebtSerializer(serializers.ModelSerializer):
     class Meta:
         model = Debt
-        exclude = ('contact', 'updated_on',)
-        
+        exclude = ('contact', 'paid', 'paid_at', 'created_at', 'updated_at', 'paid_at_auto', )
+
+class DebtPaidSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Debt
+        include = ('paid', 'paid_at')

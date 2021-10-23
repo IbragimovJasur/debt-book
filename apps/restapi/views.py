@@ -13,14 +13,14 @@ from apps.main.serializers import CurrencySerializer
 class IsContactOwner(BasePermission):
     def has_permission(self, request, view):
         try:
-            contact= Contact.objects.get(pk=view.kwargs['pk'])
+            contact= Contact.objects.get(pk=view.kwargs.get('pk'))
             return request.user == contact.owner
         except:
             return False
 
 class IsDebtOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
-        debt= Debt.objects.get(pk= view.kwargs['debt_pk']) 
+        debt= Debt.objects.get(pk= view.kwargs.get('debt_pk')) 
         return request.user == debt.contact.owner
 
 class UserCreateView(CreateAPIView):
@@ -65,7 +65,7 @@ class DebtCreateView(CreateAPIView):
     serializer_class = DebtSerializer
 
     def perform_create(self, serializer):
-        contact = Contact.objects.get(id=self.kwargs['pk'])
+        contact = Contact.objects.get(id=self.kwargs.get('pk'))
         if contact.owner == self.request.user:
             serializer.save(contact=contact)
         else:
@@ -77,7 +77,7 @@ class DebtListView(ListAPIView):
     serializer_class = DebtSerializer
 
     def get_queryset(self):
-        contact = Contact.objects.get(id=self.kwargs['pk'])
+        contact = Contact.objects.get(id=self.kwargs.get('pk'))
         debts = Debt.objects.filter(contact=contact)
         return debts
 
