@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import fields, serializers
 from .models import User, Debt
 
 class UserSerializer(serializers.ModelSerializer):
@@ -25,9 +25,9 @@ class UserSerializer(serializers.ModelSerializer):
 class DebtSerializer(serializers.ModelSerializer):
     class Meta:
         model = Debt
-        exclude = ('contact', 'paid', 'paid_at', 'created_at', 'updated_at', 'paid_at_auto', )
+        exclude = ('paid', 'paid_at', 'created_at', 'updated_at', 'paid_at_auto', )
 
 class DebtPaidSerializer(serializers.ModelSerializer):
     class Meta:
         model = Debt
-        include = ('paid', 'paid_at')
+        fields = ('paid', 'paid_at')

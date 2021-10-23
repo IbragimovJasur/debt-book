@@ -40,20 +40,20 @@ class Debt(models.Model):
     amount = models.IntegerField(
         "Amount"
     )
-    type_debt = models.CharField(
-        "Type", choices=TYPE_DEBT, max_length=50, default=2
+    type_debt = models.IntegerField(
+        "Type", choices=TYPE_DEBT, default=2
     )
     started_on = models.DateTimeField(
-        "Date when it was given/taken", blank=True
+        "Date when it was given/taken", null=True, blank=True
     )
     end_on = models.DateTimeField(
-        "Date when it has to be returned", blank=True
+        "Date when it has to be returned", null=True, blank=True
     )
     comment = models.TextField(
         "Comment", null=True, blank=True
     )
     paid = models.BooleanField(
-        "Is returned", default=False
+        "Is returned", null=True, blank=True
     )
     paid_at = models.DateTimeField(
         "Is returned at", null=True, blank=True

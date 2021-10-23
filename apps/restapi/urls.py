@@ -8,7 +8,8 @@ from .views import (
     DebtCreateView,
     DebtListView,
     DebtDetailUpdateDestroyView,
-    CurrencyCreateView
+    CurrencyCreateView,
+    DebtPaidView,
 )
 
 urlpatterns = [
@@ -22,9 +23,10 @@ urlpatterns = [
     path("contacts/<int:pk>/update-delete/", ContactUpdateDeleteView.as_view(), name='contact_update_delete'),
 
     #debt
-    path("contacts/<int:pk>/debts/create/", DebtCreateView.as_view(), name='debt_create'),
-    path("contacts/<int:pk>/debts/", DebtListView.as_view(), name='debt_list'),
-    path("contacts/<int:pk>/debts/<int:debt_pk>/", DebtDetailUpdateDestroyView.as_view(), name='debt_detail'),
+    path("debts/", DebtListView.as_view(), name='debt_list'),
+    path("debts/create/", DebtCreateView.as_view(), name='debt_create'),
+    path("debts/<int:pk>/", DebtDetailUpdateDestroyView.as_view(), name='debt_detail'),
+    path("debts/<int:pk>/paid", DebtPaidView.as_view(), name='paying_debt'),
 
     #currency
     path("currency/create/", CurrencyCreateView.as_view(), name='currency_create'),
