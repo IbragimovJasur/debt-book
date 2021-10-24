@@ -1,7 +1,5 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, CreateAPIView, ListAPIView, UpdateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated, BasePermission
-from rest_framework.response import Response
-from rest_framework.status import HTTP_405_METHOD_NOT_ALLOWED
 from apps.users.models import Debt, User
 from apps.users.serializers import UserSerializer, DebtSerializer, DebtPaidSerializer
 from apps.contacts.serializers import ContactSerializer
@@ -76,11 +74,7 @@ class DebtListView(ListAPIView):
     serializer_class = DebtSerializer
 
     def get_queryset(self):
-        #debts = Debt.objects.none()
         contact = Contact.objects.filter(owner=self.request.user)
-        #for contact in contacts:
-        #    debt = Debt.objects.get(contact=contact)
-        #    debts = debts | debt
         debts = Debt.objects.filter(contact__in=contact)
         return debts
 
