@@ -4,8 +4,8 @@ from .models import User, Debt
 
 @admin.register(Debt)
 class DebtAdmin(admin.ModelAdmin):
-    list_display = ['contact', 'amount', 'end_on']
-    list_display_links = ['contact']
+    list_display = ['owner', 'contact', 'amount', 'end_on']
+    list_display_links = ['owner']
 
 class UserAdmin(UserAdmin):
     model = User

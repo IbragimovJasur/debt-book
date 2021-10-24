@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from apps.main.models import Currency
 from apps.contacts.models import Contact
+from django.conf import settings
 
 class User(AbstractUser):
     class Meta:
@@ -30,7 +31,9 @@ class Debt(models.Model):
         (LENT, "Lend"),
         (BORROW, "Borrow"),
     )
-
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name='debts', on_delete=models.CASCADE, null=True
+    )
     contact = models.ForeignKey(
         Contact, verbose_name='Contact', related_name='debts', on_delete=models.CASCADE, null=True
     )

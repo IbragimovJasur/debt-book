@@ -67,6 +67,9 @@ class DebtCreateView(CreateAPIView):
     queryset = Debt.objects.all()
     serializer_class = DebtSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(owner = self.request.user)
+
 
 class DebtListView(ListAPIView):
     permission_classes = [IsAuthenticated]
