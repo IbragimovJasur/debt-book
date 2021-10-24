@@ -24,5 +24,6 @@ class Contact(models.Model):
     def __str__(self):
         return f"{self.owner.username}-{self.name}"
 
-    def get_contact_from_users(self):
-        return get_user_model().objects.filter(phone_number = self.phone)
+    def is_user(self):
+        user = get_user_model().objects.get(phone = self.phone).exists()
+        return user

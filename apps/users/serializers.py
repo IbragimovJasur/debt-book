@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
 class DebtSerializer(serializers.ModelSerializer):
     class Meta:
         model = Debt
-        exclude = ('paid', 'paid_at', 'created_at', 'updated_at', 'paid_at_auto', )
+        exclude = ('owner', 'paid', 'paid_at', 'created_at', 'updated_at', 'paid_at_auto', )
 
 class DebtPaidSerializer(serializers.ModelSerializer):
     class Meta:

@@ -73,5 +73,8 @@ class Debt(models.Model):
     def __str__(self):
         return self.contact.owner.username
     
+    def is_lent(self):
+        return self.type_debt == 1
+
     def get_amount(self):
         return self.amount
