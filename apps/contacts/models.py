@@ -25,5 +25,11 @@ class Contact(models.Model):
         return f"{self.owner.username}-{self.name}"
 
     def is_user(self):
-        user = get_user_model().objects.get(phone = self.phone).exists()
-        return user
+        try:
+            user = get_user_model().objects.get(phone=self.phone)
+            return True
+        except: return False
+
+    def get_contact_user(self):
+        contact_user = get_user_model().objects.get(phone=self.phone)
+        return contact_user

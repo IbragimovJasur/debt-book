@@ -56,7 +56,7 @@ class Debt(models.Model):
         "Comment", null=True, blank=True
     )
     paid = models.BooleanField(
-        "Is returned", null=True, blank=True
+        "Is returned", default=False
     )
     paid_at = models.DateTimeField(
         "Is returned at", null=True, blank=True

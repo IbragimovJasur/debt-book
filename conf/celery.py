@@ -11,8 +11,13 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     # Execute daily at midnight.
-    'send-debt-return-notification': {
+    'remind_debt_deadline': {
         'task': 'apps.users.remind_debt_deadline',
         'schedule': crontab(minute=0, hour=0),
+    },
+    #Execute every minute.
+    'debt_paid_notification': {
+        'task': 'apps.users.debt_paid_notification',
+        'schedule': crontab(),
     },
 }
