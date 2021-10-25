@@ -1,7 +1,6 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
-def check_send_notification(data):
-    # проверка на остаток дня для уведомлений
-    end_on = data['end_on']
-    today = datetime.today(timezone.utc)
-    return end_on - today
+
+def check_date(end_on):
+    today = datetime.now(timezone.utc)
+    return end_on - today.date() < timedelta(days=1)
