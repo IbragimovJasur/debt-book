@@ -5,6 +5,7 @@ from apps.users.serializers import UserSerializer, DebtSerializer, DebtPaidSeria
 from apps.contacts.serializers import ContactSerializer
 from apps.contacts.models import Contact
 from apps.main.serializers import CurrencySerializer
+from apps.main.models import Currency
 
 #built permissions
 class IsContactOwner(BasePermission):
@@ -98,4 +99,11 @@ class DebtPaidView(UpdateAPIView):
 
 class CurrencyCreateView(CreateAPIView):
     permission_classes = [IsAuthenticated]
+    queryset = Currency.objects.all()
+    serializer_class = CurrencySerializer
+
+
+class CurrencyListView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Currency.objects.all()
     serializer_class = CurrencySerializer

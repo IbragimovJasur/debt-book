@@ -1,26 +1,29 @@
-from rest_framework import fields, serializers
+from rest_framework import serializers
 from .models import User, Debt
+from django.contrib.auth import get_user_model
+from rest_framework.response import Response
+from rest_framework import status
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        extra_kwargs = {'password': {'write_only': True}}
-        fields= ('username', 'phone', 'avatar', 'password')
+        #extra_kwargs = {'sms_code': {'write_only': True}}
+        fields = ['phone', 'username', 'avatar', 'sms_code']
 
     def create(self, validated_data):
-        user = super().create(validated_data)
-        user.set_password(validated_data['password'])
-        user.save()
+        phone = validated_data['phone']
+        code = validated_data['sms_code']
+        try:
+            user = get_user_model().objects.get(phone=phone)
+            if code == user.code:
+                return Response(user, status=status.HTTP_200_OK)
+            else:
+                return Response(status.HTTP_401_UNAUTHORIZED)
+        except:        
+            user = super().create(validated_data)
+            user.save()
         return user
     
-    def update(self, instance, validated_data):
-        user = super().update(instance, validated_data)
-        try:
-            user.set_password(validated_data['password'])
-            user.save()
-        except KeyError:
-            pass
-        return user
 
 class DebtSerializer(serializers.ModelSerializer):
     class Meta:

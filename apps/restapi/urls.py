@@ -10,24 +10,26 @@ from .views import (
     DebtDetailUpdateDestroyView,
     CurrencyCreateView,
     DebtPaidView,
+    CurrencyListView,
 )
 
 urlpatterns = [
     #users
-    path("user/create/", UserCreateView.as_view(), name='user_create'),
-    path("user/<int:pk>/update-delete/", UserUpdateDeleteView.as_view(), name='user_update_delete'),
+    path("users/", UserCreateView.as_view(), name='user_create'),
+    path("users/profile/", UserUpdateDeleteView.as_view(), name='user_update_delete'),
 
     #contacts
-    path("contacts/", ContactListView.as_view(), name='contact_list'),
-    path("contacts/create/", ContactCreateView.as_view(), name='contact_create'),
-    path("contacts/<int:pk>/update-delete/", ContactUpdateDeleteView.as_view(), name='contact_update_delete'),
+    path("contacts/", ContactCreateView.as_view(), name='contact_create'),
+    path("contacts/list/", ContactListView.as_view(), name='contact_list'),
+    path("contacts/<int:pk>/", ContactUpdateDeleteView.as_view(), name='contact_update_delete'),
 
     #debt
-    path("debts/", DebtListView.as_view(), name='debt_list'),
-    path("debts/create/", DebtCreateView.as_view(), name='debt_create'),
+    path("debts/", DebtCreateView.as_view(), name='debt_create'),
+    path("debts/list/", DebtListView.as_view(), name='debt_list'),
     path("debts/<int:pk>/", DebtDetailUpdateDestroyView.as_view(), name='debt_detail'),
-    path("debts/<int:pk>/paid", DebtPaidView.as_view(), name='paying_debt'),
+    path("debts/<int:pk>/paid/", DebtPaidView.as_view(), name='paying_debt'),
 
     #currency
-    path("currency/create/", CurrencyCreateView.as_view(), name='currency_create'),
+    path("currencies/", CurrencyCreateView.as_view(), name='currency_create'),
+    path("currencies/list/", CurrencyListView.as_view(), name='currency_list'),
 ]
