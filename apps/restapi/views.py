@@ -1,25 +1,12 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, CreateAPIView, ListAPIView, UpdateAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated, BasePermission
+from rest_framework.permissions import AllowAny, BasePermission
 from apps.users.models import Debt, User
 from apps.users.serializers import UserSerializer, DebtSerializer, DebtPaidSerializer
 from apps.contacts.serializers import ContactSerializer
 from apps.contacts.models import Contact
 from apps.main.serializers import CurrencySerializer
 from apps.main.models import Currency
-
-#built permissions
-class IsContactOwner(BasePermission):
-    def has_permission(self, request, view):
-        try:
-            contact= Contact.objects.get(pk=view.kwargs.get('pk'))
-            return request.user == contact.owner
-        except:
-            return False
-
-class IsDebtOwner(BasePermission):
-    def has_object_permission(self, request, view, obj):
-        debt= Debt.objects.get(pk= view.kwargs.get('pk')) 
-        return request.user == debt.contact.owner
+from .permissions import IsContactOwner, IsDebtOwner
 
 
 class UserCreateView(CreateAPIView):
@@ -29,7 +16,6 @@ class UserCreateView(CreateAPIView):
 
 
 class UserUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -38,22 +24,20 @@ class UserUpdateDeleteView(RetrieveUpdateDestroyAPIView):
 
 
 class ContactListView(ListAPIView):
-    permission_classes = [IsAuthenticated]
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
     
     def get_queryset(self):
-        qs = Contact.objects.filter(owner = self.request.user)
+        qs = Contact.objects.filter(owner=self.request.user)
         return qs
 
 
 class ContactCreateView(CreateAPIView):
-    permission_classes = [IsAuthenticated]
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
 
     def perform_create(self, serializer):
-        serializer.save(owner = self.request.user)
+        serializer.save(owner=self.request.user)
 
 
 class ContactUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -64,16 +48,14 @@ class ContactUpdateDeleteView(RetrieveUpdateDestroyAPIView):
 
 
 class DebtCreateView(CreateAPIView):
-    permission_classes = [IsAuthenticated]
     queryset = Debt.objects.all()
     serializer_class = DebtSerializer
 
     def perform_create(self, serializer):
-        serializer.save(owner = self.request.user)
+        serializer.save(owner=self.request.user)
 
 
 class DebtListView(ListAPIView):
-    permission_classes = [IsAuthenticated]
     queryset = Debt.objects.all()
     serializer_class = DebtSerializer
 
@@ -98,12 +80,10 @@ class DebtPaidView(UpdateAPIView):
 
 
 class CurrencyCreateView(CreateAPIView):
-    permission_classes = [IsAuthenticated]
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer
 
 
 class CurrencyListView(ListAPIView):
-    permission_classes = [IsAuthenticated]
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer
